@@ -1,9 +1,26 @@
 {
+  "name": "utils-generator",
+  "version": "0.0.1",
+  "description": "utils generator using qr, weather, currency, pdf",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ."
+  },
+  "keywords": [
+    "express",
+    "mongodb",
+    "nodejs"
+  ],
+  "author": "Ashrockk",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "currency-converter-lt": "^2.0.0",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   }
 }
