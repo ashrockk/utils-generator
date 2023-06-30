@@ -6,9 +6,30 @@
     <title>Document</title>
 </head>
 <body>
-    <form id="contactform">
-        <input type="text" name="name" placeholder ="name"/>
+    <form id="contactForm" onsubmit="formSubmit(); return false;">
+        <input type="text" id="name" name="name" placeholder="name" />
         <button type="submit">Submit</button>
     </form>
+
+    <div id="msg"></div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function formSubmit() {
+            // Check for function trigger
+            console.log('i am submitted');
+            const contactForm = document.getElementById('contactForm');
+            // Capture input from form
+            const payload = {
+                name: document.getElementById('name').value,
+            };
+            // Send data to server
+            axios.post("/api/v1/form", payload).then((res) => {
+                // Display the data
+                document.getElementById('msg').innerHTML = res.data.msg;
+                // Reset form after success
+                contactForm.reset();
+            });
+        }
+    </script>
 </body>
 </html>
