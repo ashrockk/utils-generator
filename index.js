@@ -4,46 +4,49 @@ const cors = require("cors");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-// const morgan = require("morgan");
 
-// mongoose connection
-
+// mongodb connection
 mongoose
-  .connect("mongodb://localhost:27017/utils-generator")
-  .then(() => console.log('Connected!'));
+.connect("mongodb://localhost:27017/utisgenerator")
+.then(() => console.log("Connected"));
 
 const app = express();
 
 const indexRouter = require("./routes");
-
-// Setting up the third party middlewares
+//  Setting up third party middlewares
 app.use(morgan("short"));
 app.use(cors());
-//Json DATA capture
+
+// Json data capture
 app.use(bodyParser.json());
-//IDK
+
+// Form data capture
 app.use(bodyParser.urlencoded({extended: true}));
 
 // Setting up the EJS Templating
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-// Serving the static files
-app.use(express.static('public'));
+// serving the static files
+app.use(express.static("public"));
+
+// Trying to test the application level error handling
+app.get("/broken", (req, res, next) => {
+    throw new Error ("Broken")
+});
 
 app.use("/", indexRouter);
-
-// To test application level error handling
-// app.get('/broken', (req, res, next) => {
-//   throw new Error('Broken');
+// app.use((req, res, next)) => {
+//     console.log("Request Received at " +Date.now());
+//     next();
 // });
 
-// Application level error handling
-app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).send('Something went wrong');
+// Application level error handler
+app.use((err, req, res, next)  => {
+    console.log(err);
+    res.status(500).send("Something Went Wrong");
 });
 
 app.listen(8000, () => {
-  console.log("Server running on port 8000");
+    console.log("Server runnimg on port 8000");
 });

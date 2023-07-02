@@ -1,2 +1,2 @@
 # utils-generator
-new repository for MERN classes.
+I'm hella bored. :D
