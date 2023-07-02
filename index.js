@@ -4,6 +4,13 @@ const cors = require("cors");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+// const morgan = require("morgan");
+
+// mongoose connection
+
+mongoose
+  .connect("mongodb://localhost:27017/utils-generator")
+  .then(() => console.log('Connected!'));
 
 const app = express();
 
