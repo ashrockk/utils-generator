@@ -5,12 +5,20 @@ const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-// mongodb connection
 mongoose
-.connect("mongodb://localhost:27017/utisgenerator")
-.then(() => console.log("Connected"));
+.connect("mongodb://localhost:27017/")
+.then(() => 
+{
+    console.log("Connected")
+}
+).catch((err)=>{
+console.log(err)
+});
 
 const app = express();
+
+// mongodb connection
+
 
 const indexRouter = require("./routes");
 //  Setting up third party middlewares
@@ -47,6 +55,6 @@ app.use((err, req, res, next)  => {
     res.status(500).send("Something Went Wrong");
 });
 
-app.listen(8000, () => {
-    console.log("Server runnimg on port 8000");
+app.listen(3000, () => {
+    console.log("Server running on port 8000");
 });
